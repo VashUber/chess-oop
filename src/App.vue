@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import Figure from "./components/Figure.vue";
 import Board from "./models/Board";
+import Figure from "./components/Figure.vue";
 
 const board = ref<Board>(new Board());
 </script>
