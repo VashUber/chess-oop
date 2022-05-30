@@ -12,7 +12,6 @@ class Board {
   public initBoard() {
     for (let y = 0; y < 8; y++) {
       this.board.push([]);
-      const currentColor = y < 2 ? "black" : "white";
       for (let x = 0; x < 8; x++) {
         this.board[y].push(new Cell([x, y], null));
       }
@@ -26,6 +25,7 @@ class Board {
       this.board[6][i].figure = new Pawn("white", [i, 6]);
     }
   }
+
   public initRook() {
     this.board[0][0].figure = new Rook("black", [0, 0]);
     this.board[0][7].figure = new Rook("black", [7, 0]);

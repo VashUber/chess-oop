@@ -1,4 +1,5 @@
 import { figure_color, coords, Names } from "../../types";
+import Cell from "../Cell";
 import Figure from "../Figure";
 
 class Pawn extends Figure {
