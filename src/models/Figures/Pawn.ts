@@ -3,7 +3,6 @@ import Cell from "../Cell";
 import Figure from "../Figure";
 
 class Pawn extends Figure {
-  public name: Names;
   public isFirstTurn: boolean;
 
   constructor(color: figure_color, coords: coords) {

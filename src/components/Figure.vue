@@ -7,8 +7,9 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import Figure from "../models/Figure";
 
-defineProps<{ figure: any }>();
+defineProps<{ figure: Figure }>();
 </script>
 
 <style lang="scss" scoped></style>
