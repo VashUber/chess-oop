@@ -1,4 +1,5 @@
 import Cell from "./Cell";
+import Figure from "./Figure";
 import Bishop from "./Figures/Bishop";
 import King from "./Figures/King";
 import Knight from "./Figures/Knight";
@@ -17,6 +18,23 @@ class Board {
       }
     }
     this.initFigures();
+  }
+
+  public showAvailableCells(figure: Figure) {
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
+        const target = this.board[y][x];
+        target.canMove = figure.canMove(target);
+      }
+    }
+  }
+
+  public clearAvailableCells() {
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
+        this.board[y][x].canMove = false;
+      }
+    }
   }
 
   public initPawn() {

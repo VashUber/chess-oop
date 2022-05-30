@@ -12,6 +12,10 @@
           ]"
           @click="selectCell(cell)"
         >
+          <div
+            class="w-5 h-5 bg-sky-800 absolute z-50 rounded-full"
+            v-if="cell.canMove"
+          ></div>
           <Figure v-if="cell.figure" :figure="cell.figure" />
         </div>
       </div>
@@ -20,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import Board from "./models/Board";
 import Figure from "./components/Figure.vue";
 import Cell from "./models/Cell";
@@ -43,10 +47,16 @@ const selectCell = (target: Cell) => {
   ) {
     selectedCell.value = target;
   } // если второй раз кликаем по своей же другой фигуре, то фокус переходит на нее
-  if (selectedCell.value && selectedCell.value !== target) {
+  if (selectedCell.value && selectedCell.value !== target && target.canMove) {
     selectedCell.value.figure!.makeMove(target);
     selectedCell.value.figure = null;
     selectedCell.value = null;
   } // в остальных случаях делаем ход
 };
+
+watch(selectedCell, () => {
+  if (selectedCell.value)
+    board.value.showAvailableCells(selectedCell.value.figure!);
+  else board.value.clearAvailableCells();
+});
 </script>

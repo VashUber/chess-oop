@@ -14,8 +14,10 @@ class Figure {
   }
 
   public makeMove(target: Cell) {
-    this.coords = target.coords;
-    target.figure = this;
+    return;
+  }
+  public canMove(target: Cell) {
+    return true;
   }
 }
 
