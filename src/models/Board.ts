@@ -15,7 +15,7 @@ class Board {
     for (let y = 0; y < 8; y++) {
       this.board.push([]);
       for (let x = 0; x < 8; x++) {
-        this.board[y].push(new Cell([x, y], null));
+        this.board[y].push(new Cell([x, y], null, this.board));
       }
     }
     this.initFigures();

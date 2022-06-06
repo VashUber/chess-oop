@@ -8,15 +8,9 @@ class Rook extends Figure {
     this.name = Names.ROOK;
   }
 
-  makeMove(target: Cell) {
-    this.coords = target.coords;
-    target.figure = this;
-  }
-
   canMoveOn(target: Cell) {
-    if (this.isVerticalOrHorizontal(target)) {
+    if (target.isVerticalEmpty(this) || target.isHorizontalEmpty(this))
       return true;
-    }
 
     return false;
   }

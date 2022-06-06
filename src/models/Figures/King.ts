@@ -7,10 +7,6 @@ class King extends Figure {
     super(color, coords);
     this.name = Names.KING;
   }
-  makeMove(target: Cell) {
-    this.coords = target.coords;
-    target.figure = this;
-  }
 
   canMoveOn(target: Cell) {
     const xd = Math.abs(target.coords[0] - this.coords[0]);

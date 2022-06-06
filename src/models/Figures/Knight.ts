@@ -8,11 +8,6 @@ class Knight extends Figure {
     this.name = Names.KNIGHT;
   }
 
-  makeMove(target: Cell) {
-    this.coords = target.coords;
-    target.figure = this;
-  }
-
   canMoveOn(target: Cell) {
     const xd = Math.abs(this.coords[0] - target.coords[0]);
     const yd = Math.abs(this.coords[1] - target.coords[1]);

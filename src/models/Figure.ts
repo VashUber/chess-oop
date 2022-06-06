@@ -16,23 +16,11 @@ class Figure {
   }
 
   public makeMove(target: Cell) {
-    return;
+    this.coords = target.coords;
+    target.figure = this;
   }
   public canMoveOn(target: Cell) {
     return true;
-  }
-  public isVerticalOrHorizontal(target: Cell) {
-    const isEqualX = target.coords[0] === this.coords[0];
-    const isEqualY = target.coords[1] === this.coords[1];
-
-    if (isEqualX && target.figure?.color !== this.color) {
-      return true;
-    }
-    if (isEqualY && target.figure?.color !== this.color) {
-      return true;
-    }
-
-    return false;
   }
 }
 
