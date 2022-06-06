@@ -24,7 +24,7 @@ class Board {
     for (let y = 0; y < 8; y++) {
       for (let x = 0; x < 8; x++) {
         const target = this.board[y][x];
-        target.canMove = figure.canMove(target);
+        target.canMove = figure.canMoveOn(target);
       }
     }
   }

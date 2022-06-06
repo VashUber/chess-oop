@@ -18,7 +18,7 @@ class Figure {
   public makeMove(target: Cell) {
     return;
   }
-  public canMove(target: Cell) {
+  public canMoveOn(target: Cell) {
     return true;
   }
 }

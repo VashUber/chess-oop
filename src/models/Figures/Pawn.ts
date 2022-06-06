@@ -17,15 +17,23 @@ class Pawn extends Figure {
     target.figure = this;
   }
 
-  canMove(target: Cell) {
+  canMoveOn(target: Cell) {
     const yd = this.coords[1] - target.coords[1];
     const color = this.color === "black" ? -1 : 1;
 
-    if (target.coords[0] === this.coords[0]) {
+    if (target.coords[0] === this.coords[0] && !target.figure) {
       if (yd * color === 1) return true;
       if (this.isFirstTurn && yd * color === 2) {
         return true;
       }
+    }
+
+    if (
+      target.figure &&
+      yd * color === 1 &&
+      Math.abs(target.coords[0] - this.coords[0]) === 1
+    ) {
+      return true;
     }
     return false;
   }
