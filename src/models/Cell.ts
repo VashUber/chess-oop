@@ -47,6 +47,26 @@ class Cell {
 
     return true;
   }
+
+  public isDiagonalEmpty(target: Figure) {
+    const xd = Math.abs(target.coords[0] - this.coords[0]);
+    const yd = Math.abs(target.coords[1] - this.coords[1]);
+
+    const xDir = target.coords[0] > this.coords[0] ? 1 : -1;
+    const yDir = target.coords[1] > this.coords[1] ? 1 : -1;
+
+    if (xd === yd && this.figure?.color !== target.color) {
+      for (let i = 1; i < yd; i++) {
+        if (
+          this.board[this.coords[1] + yDir * i][this.coords[0] + xDir * i]
+            .figure
+        )
+          return false;
+      }
+    } else return false;
+
+    return true;
+  }
 }
 
 export default Cell;

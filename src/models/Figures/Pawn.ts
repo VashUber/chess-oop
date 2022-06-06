@@ -36,7 +36,8 @@ class Pawn extends Figure {
     if (
       target.figure &&
       yd * color === 1 &&
-      Math.abs(target.coords[0] - this.coords[0]) === 1
+      Math.abs(target.coords[0] - this.coords[0]) === 1 &&
+      this.color !== target.figure.color
     ) {
       return true;
     }

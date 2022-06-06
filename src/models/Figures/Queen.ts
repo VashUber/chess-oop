@@ -9,7 +9,11 @@ class Queen extends Figure {
   }
 
   canMoveOn(target: Cell) {
-    if (target.isVerticalEmpty(this) || target.isHorizontalEmpty(this))
+    if (
+      target.isVerticalEmpty(this) ||
+      target.isHorizontalEmpty(this) ||
+      target.isDiagonalEmpty(this)
+    )
       return true;
 
     return false;
