@@ -1,6 +1,7 @@
 import { figure_color, coords, Names } from "../../types";
 import Cell from "../Cell";
 import Figure from "../Figure";
+import Queen from "./Queen";
 
 class Pawn extends Figure {
   public isFirstTurn: boolean;
@@ -15,6 +16,10 @@ class Pawn extends Figure {
     if (this.isFirstTurn) this.isFirstTurn = false;
     this.coords = target.coords;
     target.figure = this;
+
+    if (this.coords[1] === 7 || this.coords[1] === 0) {
+      target.figure = new Queen(this.color, this.coords);
+    }
   }
 
   canMoveOn(target: Cell) {

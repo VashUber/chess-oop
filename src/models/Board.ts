@@ -1,3 +1,4 @@
+import { Names } from "../types";
 import Cell from "./Cell";
 import Figure from "./Figure";
 import Bishop from "./Figures/Bishop";
@@ -24,7 +25,8 @@ class Board {
     for (let y = 0; y < 8; y++) {
       for (let x = 0; x < 8; x++) {
         const target = this.board[y][x];
-        target.canMove = figure.canMoveOn(target);
+        if (target.figure?.name !== Names.KING)
+          target.canMove = figure.canMoveOn(target);
       }
     }
   }
