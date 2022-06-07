@@ -3,6 +3,9 @@ import Cell from "../Cell";
 import Figure from "../Figure";
 
 class King extends Figure {
+  public entourage = [] as Cell[];
+  public check = false;
+
   constructor(color: figure_color, coords: coords) {
     super(color, coords);
     this.name = Names.KING;

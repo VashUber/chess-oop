@@ -7,6 +7,7 @@ class Cell {
   public figure: Figure | null;
   public canMove: boolean = false;
   public board: Cell[][];
+  public isAttack = false;
 
   constructor(coords: coords, figure: Figure | null, board: Cell[][]) {
     this.coords = coords;

@@ -10,6 +10,10 @@ import Rook from "./Figures/Rook";
 
 class Board {
   public board: Cell[][] = [];
+  public kings = {} as {
+    black: Cell;
+    white: Cell;
+  };
 
   public initBoard() {
     for (let y = 0; y < 8; y++) {
@@ -75,6 +79,8 @@ class Board {
   public initKing() {
     this.board[0][4].figure = new King("black", [4, 0]);
     this.board[7][4].figure = new King("white", [4, 7]);
+    this.kings.black = this.board[0][4];
+    this.kings.white = this.board[7][4];
   }
 
   public initFigures() {
@@ -85,6 +91,41 @@ class Board {
     this.initQueen();
     this.initKing();
   }
+
+  public setKingEntourage() {
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
+        const target = this.board[y][x];
+        const xd = Math.abs(target.coords[0] - this.kings.black.coords[0]);
+        const yd = Math.abs(target.coords[1] - this.kings.black.coords[1]);
+
+        if (
+          (xd === 1 && yd === 1) ||
+          (xd === 0 && yd === 1) ||
+          (xd === 1 && yd === 0)
+        ) {
+          const king = this.kings.black.figure as King;
+          if (target.figure) {
+            if (target.figure.color === "black") {
+              king.entourage = [...new Set([...king.entourage, target])];
+            }
+          } else {
+            king.entourage = [...new Set([...king.entourage, target])];
+          }
+        }
+      }
+    }
+  }
+
+  // public getKings() {
+  //   return this.board.reduce((prev, cur) => {
+  //     const obj = {} as { black: Cell; white: Cell };
+  //     cur.forEach((elem) => {
+  //       if (elem.figure?.name === Names.KING) obj[elem.figure.color] = elem;
+  //     });
+  //     return { ...obj, ...prev };
+  //   }, {} as { black: King; white: King });
+  // }
 
   constructor() {
     this.initBoard();

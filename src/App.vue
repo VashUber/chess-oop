@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center h-screen">
+  <div class="flex justify-center items-center h-screen flex-col">
     <div class="border-8 border-slate-400">
       <div v-for="(row, y) in board.board" :key="y" class="flex">
         <div
@@ -28,12 +28,19 @@ import { ref, watch } from "vue";
 import Board from "./models/Board";
 import Figure from "./components/Figure.vue";
 import Cell from "./models/Cell";
+import King from "./models/Figures/King";
+import { figure_color } from "./types";
 
 const board = ref<Board>(new Board());
 const selectedCell = ref<Cell | null>();
+const currentPlayer = ref<figure_color>("white");
 
 const selectCell = (target: Cell) => {
-  if (target.figure && !selectedCell.value) {
+  if (
+    target.figure &&
+    !selectedCell.value &&
+    target.figure.color === currentPlayer.value
+  ) {
     selectedCell.value = target;
     return;
   } // при первом клике выбирается фигура, которая будет ходить
@@ -51,12 +58,38 @@ const selectCell = (target: Cell) => {
     selectedCell.value.figure!.makeMove(target);
     selectedCell.value.figure = null;
     selectedCell.value = null;
+    currentPlayer.value = currentPlayer.value === "white" ? "black" : "white";
   } // в остальных случаях делаем ход
 };
 
 watch(selectedCell, () => {
   if (selectedCell.value)
     board.value.showAvailableCells(selectedCell.value.figure!);
-  else board.value.clearAvailableCells();
+  else {
+    board.value.clearAvailableCells();
+  }
 });
+
+// watch(board.value.board, () => {
+//   board.value.setKingEntourage();
+
+//   for (let y = 0; y < 8; y++) {
+//     for (let x = 0; x < 8; x++) {
+//       const king = board.value.kings.black.figure as King;
+
+//       if (board.value.board[y][x].figure?.canMoveOn(board.value.kings.black))
+//         king.check = true;
+
+//       king.entourage.forEach((elem) => {
+//         if (board.value.board[y][x].figure?.canMoveOn(elem)) {
+//           elem.isAttack = true;
+//         }
+//       });
+//     }
+//   }
+// });
+
+// watch(board.value.kings, () => {}, {
+//   deep: true,
+// });
 </script>
