@@ -7,7 +7,7 @@ class Figure {
   public color: figure_color;
   public id: string;
   public coords: coords;
-  public name: Names = "" as Names;
+  public name = "" as Names;
 
   constructor(color: figure_color, coords: coords) {
     this.color = color;

@@ -29,7 +29,7 @@ import Board from "./models/Board";
 import Figure from "./components/Figure.vue";
 import Cell from "./models/Cell";
 import King from "./models/Figures/King";
-import { figure_color } from "./types";
+import { figure_color, Names } from "./types";
 
 const board = ref<Board>(new Board());
 const selectedCell = ref<Cell | null>();
@@ -56,6 +56,9 @@ const selectCell = (target: Cell) => {
   } // если второй раз кликаем по своей же другой фигуре, то фокус переходит на нее
   if (selectedCell.value && selectedCell.value !== target && target.canMove) {
     selectedCell.value.figure!.makeMove(target);
+    // if (selectedCell.value.figure?.name === Names.KING) {
+    //   board.value.kings[currentPlayer.value] = target;
+    // }
     selectedCell.value.figure = null;
     selectedCell.value = null;
     currentPlayer.value = currentPlayer.value === "white" ? "black" : "white";
@@ -70,26 +73,26 @@ watch(selectedCell, () => {
   }
 });
 
-// watch(board.value.board, () => {
-//   board.value.setKingEntourage();
+// watch(currentPlayer, (cur, prev) => {
+//   const king = board.value.kings[prev].figure as King;
 
 //   for (let y = 0; y < 8; y++) {
 //     for (let x = 0; x < 8; x++) {
-//       const king = board.value.kings.black.figure as King;
-
-//       if (board.value.board[y][x].figure?.canMoveOn(board.value.kings.black))
+//       if (board.value.board[y][x].figure?.canMoveOn(board.value.kings[prev]))
 //         king.check = true;
 
 //       king.entourage.forEach((elem) => {
-//         if (board.value.board[y][x].figure?.canMoveOn(elem)) {
+//         if (
+//           board.value.board[y][x].figure?.canMoveOn(elem) &&
+//           board.value.board[y][x].figure?.color !== prev
+//         ) {
 //           elem.isAttack = true;
 //         }
 //       });
 //     }
 //   }
-// });
+//   board.value.setKingEntourage(prev);
 
-// watch(board.value.kings, () => {}, {
-//   deep: true,
+//   console.log(board.value.kings);
 // });
 </script>

@@ -3,8 +3,8 @@ import Cell from "../Cell";
 import Figure from "../Figure";
 
 class King extends Figure {
-  public entourage = [] as Cell[];
-  public check = false;
+  // public entourage = [] as Cell[];
+  // public check = false;
 
   constructor(color: figure_color, coords: coords) {
     super(color, coords);
@@ -23,6 +23,16 @@ class King extends Figure {
     ) {
       return true;
     }
+
+    // if (
+    //   ((xd === 1 && yd === 1) ||
+    //     (xd === 0 && yd === 1) ||
+    //     (xd === 1 && yd === 0)) &&
+    //   target.figure?.color !== this.color &&
+    //   !target.isAttack
+    // ) {
+    //   return true;
+    // }
 
     return false;
   }
